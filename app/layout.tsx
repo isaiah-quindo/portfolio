@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Isaiah Quindo",
+    title: "Isaiah Quindo | Product Designer & Frontend Developer",
     description: "Product Designer & Frontend Developer",
 };
 
