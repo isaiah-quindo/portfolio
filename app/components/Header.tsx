@@ -13,7 +13,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: isInView ? 1 : 0 }}
             transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
-            className="absolute top-0 left-0 w-full z-50">
+            className="absolute top-0 left-0 w-full z-50 px-6">
             <header className="border-b border-gray-800">
                 <nav className="max-w-7xl m-auto py-8">
                     <Link
