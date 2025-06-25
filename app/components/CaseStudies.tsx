@@ -386,14 +386,17 @@ export default function CaseStudies() {
                   lost items.
                 </p>
               </motion.div>
-              <Link href="lost-and-found-ph-83d720ab6d69.herokuapp.com">
+              <Link
+                href="https://lost-and-found-ph-83d720ab6d69.herokuapp.com"
+                target="_blank"
+              >
                 <motion.div
                   initial={{ opacity: 0, y: 100 }}
                   animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 100 }}
                   transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
                 >
                   <div className="rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-4 flex flex-row gap-2 justify-between">
-                    Live site
+                    Visit live site
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
