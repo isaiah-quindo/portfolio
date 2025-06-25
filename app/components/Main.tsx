@@ -11,7 +11,7 @@ export default function Main() {
 
   useEffect(() => {
     const checkIsDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024); // 1024px is Tailwind's lg breakpoint
+      setIsDesktop(window.innerWidth >= 1024);
     };
 
     checkIsDesktop();
@@ -83,7 +83,7 @@ export default function Main() {
                   height={100}
                   className="oa-logomark"
                 />
-                Let's connect on Linkedin
+                Let&apos;s connect on Linkedin
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

@@ -17,8 +17,8 @@ export default function Experience() {
             <p className="text-gray-400">
               By combining my expertise in design and development, I bring a
               unique blend of creativity and technical proficiency to every
-              project I undertake. Let's collaborate to transform your digital
-              vision into a visually stunning and user-friendly reality.
+              project I undertake. Let&apos;s collaborate to transform your
+              digital vision into a visually stunning and user-friendly reality.
             </p>
           </div>
           <div className="flex flex-col gap-8">
