@@ -36,7 +36,7 @@ export default function CaseStudies() {
                                     y: isInView ? 0 : 100,
                                 }}
                                 transition={{
-                                    duration: 1.5,
+                                    duration: 1,
                                     delay: 0.5,
                                     ease: "easeInOut",
                                 }}>
@@ -51,7 +51,7 @@ export default function CaseStudies() {
                                     y: isInView ? 0 : 100,
                                 }}
                                 transition={{
-                                    duration: 1.5,
+                                    duration: 1,
                                     delay: 0.5,
                                     ease: "easeInOut",
                                 }}
@@ -100,8 +100,8 @@ export default function CaseStudies() {
                                 y: isInView ? 0 : 100,
                             }}
                             transition={{
-                                duration: 2,
-                                delay: 1.5,
+                                duration: 1.5,
+                                delay: 1,
                                 ease: "easeInOut",
                             }}
                             className="flex flex-col order-2 xl:order-2">
@@ -196,7 +196,7 @@ export default function CaseStudies() {
                                 x: isInView ? 0 : 100,
                             }}
                             transition={{
-                                duration: 1.25,
+                                duration: 1,
                                 delay: 0.5,
                                 ease: "easeInOut",
                             }}
@@ -220,7 +220,7 @@ export default function CaseStudies() {
                                 y: isInView ? 0 : 100,
                             }}
                             transition={{
-                                duration: 1.25,
+                                duration: 1,
                                 delay: 0.5,
                                 ease: "easeInOut",
                             }}
@@ -241,7 +241,7 @@ export default function CaseStudies() {
                                     y: isInView ? 0 : 100,
                                 }}
                                 transition={{
-                                    duration: 1.5,
+                                    duration: 1,
                                     delay: 0.5,
                                     ease: "easeInOut",
                                 }}>
@@ -256,7 +256,7 @@ export default function CaseStudies() {
                                     y: isInView ? 0 : 100,
                                 }}
                                 transition={{
-                                    duration: 1.5,
+                                    duration: 1,
                                     delay: 0.5,
                                     ease: "easeInOut",
                                 }}
@@ -268,35 +268,24 @@ export default function CaseStudies() {
                                     charting game.
                                 </p>
                             </motion.div>
+
                             <Link href="/case-studies/investa-trading-grounds">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 100 }}
-                                    animate={{
-                                        opacity: isInView ? 1 : 0,
-                                        y: isInView ? 0 : 100,
-                                    }}
-                                    transition={{
-                                        duration: 1,
-                                        delay: 1,
-                                        ease: "easeInOut",
-                                    }}>
-                                    <div className="rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-4 flex flex-row gap-2 justify-between">
-                                        Read case study
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 self-start">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                                            />
-                                        </svg>
-                                    </div>
-                                </motion.div>
+                                <div className="rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-4 flex flex-row gap-2 justify-between">
+                                    Read case study
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="size-6 self-start">
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                                        />
+                                    </svg>
+                                </div>
                             </Link>
                         </div>
                         <motion.div
@@ -306,8 +295,8 @@ export default function CaseStudies() {
                                 x: isInView ? 0 : 100,
                             }}
                             transition={{
-                                duration: 2,
-                                delay: 1.5,
+                                duration: 1.5,
+                                delay: 1,
                                 ease: "easeInOut",
                             }}
                             className="flex flex-col order-2 xl:order-2">
@@ -438,7 +427,7 @@ export default function CaseStudies() {
                                     y: isInView ? 0 : 100,
                                 }}
                                 transition={{
-                                    duration: 1.5,
+                                    duration: 1,
                                     delay: 0.5,
                                     ease: "easeInOut",
                                 }}>
@@ -453,7 +442,7 @@ export default function CaseStudies() {
                                     y: isInView ? 0 : 100,
                                 }}
                                 transition={{
-                                    duration: 1.5,
+                                    duration: 1,
                                     delay: 0.5,
                                     ease: "easeInOut",
                                 }}
@@ -475,7 +464,7 @@ export default function CaseStudies() {
                                         y: isInView ? 0 : 100,
                                     }}
                                     transition={{
-                                        duration: 1,
+                                        duration: 0.5,
                                         delay: 1,
                                         ease: "easeInOut",
                                     }}>
@@ -505,8 +494,8 @@ export default function CaseStudies() {
                                 y: isInView ? 0 : 100,
                             }}
                             transition={{
-                                duration: 2,
-                                delay: 1.5,
+                                duration: 1,
+                                delay: 1,
                                 ease: "easeInOut",
                             }}
                             className="flex flex-col order-2 xl:order-3">
@@ -597,7 +586,7 @@ export default function CaseStudies() {
                                 x: isInView ? 0 : 100,
                             }}
                             transition={{
-                                duration: 1.25,
+                                duration: 1,
                                 delay: 0.5,
                                 ease: "easeInOut",
                             }}

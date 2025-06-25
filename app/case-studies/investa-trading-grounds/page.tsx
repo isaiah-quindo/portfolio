@@ -1,57 +1,29 @@
 /* eslint-disable react/no-unescaped-entities */
-"use client";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 
 export default function InvestaTradingGrounds() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
     return (
         <>
-            <motion.div
-                ref={ref}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isInView ? 1 : 0 }}
-                transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
-                className="absolute top-0 left-0 w-full z-50">
-                <Header />
-            </motion.div>
+            <Header />
             <div className="main-case-study min-h-lvh px-6 pt-40 px-6">
                 <div className="max-w-7xl m-auto">
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: isInView ? 1 : 0 }}
-                        transition={{
-                            duration: 2,
-                            delay: 1.5,
-                            ease: "easeInOut",
-                        }}
-                        className="flex flex-col gap-10">
+                    <div className="flex flex-col gap-10">
                         <div className="flex flex-col gap-4 max-w-3xl">
                             <h1 className="text-4xl font-bold">
                                 Investa Trading Grounds
                             </h1>
                             <p className="text-gray-400">Web and Mobile</p>
                         </div>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: isInView ? 1 : 0 }}
-                            transition={{
-                                duration: 2,
-                                delay: 1.5,
-                                ease: "easeInOut",
-                            }}>
-                            <Image
-                                src="/images/itg-showcase.jpg"
-                                alt="Investa Trading Grounds"
-                                width={1280}
-                                height={720}
-                                className="rounded-4xl h-auto"
-                            />{" "}
-                        </motion.div>
+
+                        <Image
+                            src="/images/itg-showcase.jpg"
+                            alt="Investa Trading Grounds"
+                            width={1280}
+                            height={720}
+                            className="rounded-4xl h-auto"
+                        />
 
                         <div className="flex flex-col gap-4 max-w-3xl">
                             <h2 className="text-2xl font-bold">Overview</h2>
@@ -92,14 +64,10 @@ export default function InvestaTradingGrounds() {
                                 learn from, without changing the core mechanics.
                             </p>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isInView ? 0 : 1 }}
-                    transition={{ duration: 2, delay: 1.5, ease: "easeInOut" }}
-                    className="bg-black pb-40 px-6">
+                <div className="bg-black pb-40 px-6">
                     <div className="max-w-7xl m-auto">
                         <div className="flex flex-col gap-10">
                             <Image
@@ -319,7 +287,7 @@ export default function InvestaTradingGrounds() {
                             </div>
                         </div>
                     </div>
-                </motion.div>
+                </div>
             </div>
             <Footer />
         </>
