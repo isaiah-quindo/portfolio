@@ -66,8 +66,8 @@ export default function Main() {
           </div>
           <div>
             <p className="description">
-              I'm a product designer and frontend developer driven by a passion
-              for creating user-centric experience.
+              I&apos;m a product designer and frontend developer driven by a
+              passion for creating user-centric experience.
             </p>
           </div>
           <div className="flex flex-col items-stretch justify-stretch">

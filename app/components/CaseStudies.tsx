@@ -31,7 +31,7 @@ export default function CaseStudies() {
                 transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
               >
                 <h3 className="text-2xl font-bold uppercase">
-                  Law Advisor's Access to Justice
+                  Law Advisor&apos;s Access to Justice
                 </h3>
               </motion.div>
               <motion.div

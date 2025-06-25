@@ -49,7 +49,7 @@ export default function Experience() {
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border border-gray-300 hover:border-blue-300 transition-all duration-300 rounded-lg p-4">
                 <div className="flex flex-col gap-1">
                   <h3 className="text-xl font-bold uppercase">
-                    Law Advisor Ventures
+                    Law Advisor&apos;s Access to Justice
                   </h3>
                   <p className="text-gray-400">Senior Product Designer</p>
                 </div>

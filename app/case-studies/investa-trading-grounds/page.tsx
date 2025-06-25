@@ -95,7 +95,7 @@ export default function InvestaTradingGrounds() {
               </p>
               <blockquote className="text-lg italic font-semibold text-gray-300 border-l-4 border-gray-500 pl-4">
                 <p>
-                  “It works—but it’s not fun,” said one user in early feedback.
+                  “It works—but it's not fun,” said one user in early feedback.
                 </p>
               </blockquote>
               <p className="text-gray-400">
@@ -309,13 +309,18 @@ export default function InvestaTradingGrounds() {
                 This project taught me how to translate complex financial
                 concepts into approachable gameplay. The real win was seeing
                 beginners genuinely enjoy learning technical analysis because
-                the UI didn’t intimidate them, it invited them in.
+                the UI didn't intimidate them, it invited them in.
               </p>
-              <p className="text-gray-400">
-                Trading Grounds pushed me to think beyond “pretty” interfaces. I
-                learned how to design with emotion and motivation in mind, how a
-                theme, sound, and animation can make someone want to keep
-                learning.
+              <p className="text-gray-500">
+                &quot;it was FUN&quot;. Being able to design a game experience
+                was a new thing to me. Although I play games as a hobby, but
+                that perspective is way different from being part of the one
+                making the game. And yet the fun it brought us was profound.
+              </p>
+              <p className="text-gray-500">
+                It was also fulfilling in so many ways. Seeing people enjoying
+                the game and even participate in discussions to improve it,
+                it&apos;s overwhelming.
               </p>
             </div>
           </div>
