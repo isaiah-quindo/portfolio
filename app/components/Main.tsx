@@ -31,7 +31,7 @@ export default function Main() {
   );
 
   return (
-    <main className="flex flex-col items-center w-full h-auto lg:h-lvh md:h-auto sm:h-auto p-6 ">
+    <main className="flex flex-col items-center justify-center w-full h-auto lg:h-lvh md:h-auto sm:h-auto p-6 ">
       <motion.div
         className="w-full max-w-7xl"
         style={{
@@ -42,7 +42,7 @@ export default function Main() {
         }}
         transition={{ type: "spring", stiffness: 200 }}
       >
-        <div className="wordmark-container overflow-hidden pt-10 lg:pt-60 md:pt-20 sm:pt-10">
+        <div className="wordmark-container overflow-hidden">
           <Image
             className="wordmark"
             src="/images/wordmark.svg"
