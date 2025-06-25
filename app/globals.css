@@ -162,6 +162,15 @@ main {
   background-color: #e8e8e3;
 }
 
+.experience {
+  background-color: #e8e8e3;
+}
+
+.experience-container {
+  background-color: #000000;
+  color: #e8e8e3;
+}
+
 @keyframes reveal-main {
   0% {
     transform: translateY(-100%);

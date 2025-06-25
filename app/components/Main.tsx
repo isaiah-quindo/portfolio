@@ -3,23 +3,35 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import TimeDisplay from "./TimeDisplay";
+import { useEffect, useState } from "react";
 
 export default function Main() {
   const { scrollY } = useScroll();
+  const [isDesktop, setIsDesktop] = useState(true);
 
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024); // 1024px is Tailwind's lg breakpoint
+    };
+
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop);
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
+
+  const opacity = useTransform(scrollY, [0, 1000], [1, isDesktop ? 0 : 1]);
 
   const y = useTransform(
     scrollY,
-    [0, 500],
-    [0, 250], // Adjusted for smoother parallax with Lenis
+    [0, 1000],
+    isDesktop ? [0, 250] : [0, 0], // If not desktop, y will always be 0
     {
       ease: (t: number) => t * (2 - t), // Custom easing function
     }
   );
 
   return (
-    <main className="flex flex-col items-center w-full h-auto lg:h-lvh md:h-auto sm:h-auto p-6">
+    <main className="flex flex-col items-center w-full h-auto lg:h-lvh md:h-auto sm:h-auto p-6 ">
       <motion.div
         className="w-full max-w-7xl"
         style={{
@@ -28,7 +40,7 @@ export default function Main() {
           // This ensures smoother parallax movement
           willChange: "transform",
         }}
-        transition={{ type: "spring", stiffness: 100 }}
+        transition={{ type: "spring", stiffness: 200 }}
       >
         <div className="wordmark-container overflow-hidden pt-10 lg:pt-60 md:pt-20 sm:pt-10">
           <Image
@@ -49,7 +61,7 @@ export default function Main() {
               alt="Ïsaiah Quindo"
               width={500}
               height={500}
-              className="profile-image rounded-lg filter grayscale"
+              className="profile-image rounded-lg filter grayscale w-1/2 sm:w-full mx-auto"
             />
           </div>
           <div>
