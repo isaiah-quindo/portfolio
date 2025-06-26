@@ -54,7 +54,7 @@ export default function LawAdvisorAccessToJustice() {
           </div>
         </div>
 
-        <div className="bg-black pb-40 px-6">
+        <div className="bg-black pb-40">
           <div className="max-w-7xl m-auto">
             <div className="flex flex-col gap-10">
               <Image
@@ -62,7 +62,7 @@ export default function LawAdvisorAccessToJustice() {
                 alt="Law Advisor"
                 width={750}
                 height={0}
-                className="rounded-4xl h-auto mt-8"
+                className="h-auto mt-8"
               />
               <div className="flex flex-col gap-4 max-w-3xl">
                 <h2 className="text-2xl font-bold">My Role</h2>
@@ -148,7 +148,7 @@ export default function LawAdvisorAccessToJustice() {
                 alt="Law Advisor - Solution 1"
                 width={1280}
                 height={720}
-                className="rounded-4xl w-full h-auto"
+                className=" w-full h-auto"
               />
               <div className="flex flex-col gap-4 max-w-3xl">
                 <h3 className="text-xl font-bold">
@@ -171,7 +171,7 @@ export default function LawAdvisorAccessToJustice() {
                 alt="Law Advisor - Solution 2"
                 width={1280}
                 height={720}
-                className="rounded-4xl w-full h-auto"
+                className=" w-full h-auto"
               />
               <div className="flex flex-col gap-4 max-w-3xl">
                 <h3 className="text-xl font-bold">3. Case Management</h3>
@@ -192,7 +192,7 @@ export default function LawAdvisorAccessToJustice() {
                 alt="Law Advisor - Solution 3"
                 width={1280}
                 height={720}
-                className="rounded-4xl w-full h-auto"
+                className="w-full h-auto"
               />
               <div className="flex flex-col gap-4 max-w-3xl">
                 <h2 className="text-2xl font-bold">Reflections</h2>

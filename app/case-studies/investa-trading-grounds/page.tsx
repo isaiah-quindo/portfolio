@@ -61,7 +61,7 @@ export default function InvestaTradingGrounds() {
           </div>
         </div>
 
-        <div className="bg-black pb-40 px-6">
+        <div className="bg-black pb-40">
           <div className="max-w-7xl m-auto">
             <div className="flex flex-col gap-10">
               <Image
