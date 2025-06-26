@@ -18,8 +18,7 @@ export const metadata: Metadata = {
   description: "Product Designer & Frontend Developer",
   openGraph: {
     title: "Isaiah Quindo | Product Designer & Frontend Developer",
-    description:
-      "Product designer and frontend developer driven by a passion for creating user-centric experience.",
+    description: "Driven by a passion for creating user-centric experience.",
     images: [
       {
         url: "/images/fb-opengraph.png", // Replace with your image URL
