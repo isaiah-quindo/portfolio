@@ -28,7 +28,27 @@ export default function CaseStudies() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Access to Justice */}
-                        <div className="flex flex-col gap-4 order-1 xl:order-1">
+                        <motion.div
+                            initial={{ opacity: 0, x: 100 }}
+                            animate={{
+                                opacity: isInView ? 1 : 0,
+                                x: isInView ? 0 : 100,
+                            }}
+                            transition={{
+                                duration: 1,
+                                delay: 0.5,
+                                ease: "easeInOut",
+                            }}
+                            className="order-1 xl:order-1">
+                            <Image
+                                src="/images/a2j-thumb.png"
+                                alt="Access to Justice"
+                                width={500}
+                                height={0}
+                                className="rounded-lg w-full"
+                            />
+                        </motion.div>
+                        <div className="flex flex-col gap-4 order-2 xl:order-2">
                             <motion.div
                                 initial={{ opacity: 0, y: 100 }}
                                 animate={{
@@ -190,26 +210,6 @@ export default function CaseStudies() {
                                 </div>
                             </div>
                         </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                x: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1,
-                                delay: 0.5,
-                                ease: "easeInOut",
-                            }}
-                            className="order-3 xl:order-3">
-                            <Image
-                                src="/images/a2j-thumb.png"
-                                alt="Access to Justice"
-                                width={500}
-                                height={0}
-                                className="rounded-lg w-full"
-                            />
-                        </motion.div>
                     </div>
 
                     {/* Investa Trading Grounds */}
@@ -225,7 +225,7 @@ export default function CaseStudies() {
                                 delay: 0.5,
                                 ease: "easeInOut",
                             }}
-                            className="order-3 xl:order-1">
+                            className="order-1 xl:order-1">
                             <Image
                                 src="/images/itg-showcase.jpg"
                                 alt="Investa Trading Grounds"
@@ -436,7 +436,7 @@ export default function CaseStudies() {
                     </h2>
                     {/* Personal Project */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div className="flex flex-col gap-4 order-1 xl:order-1">
+                        <div className="flex flex-col gap-4 order-2 xl:order-2">
                             <motion.div
                                 initial={{ opacity: 0, y: 100 }}
                                 animate={{
@@ -449,7 +449,7 @@ export default function CaseStudies() {
                                     ease: "easeInOut",
                                 }}>
                                 <h3 className="text-2xl font-bold uppercase">
-                                    Personal Project: Lost and Found PH
+                                    Rate My Coffee
                                 </h3>
                             </motion.div>
                             <motion.div
@@ -465,14 +465,14 @@ export default function CaseStudies() {
                                 }}
                                 className="flex-grow-1">
                                 <p className="text-md text-gray-500">
-                                    Full-stack web application for the Lost and
-                                    Found items. This is a personal project that
-                                    I built to help people find their lost
-                                    items.
+                                    Full-stack web application for rating coffee
+                                    shops in the Philippines. This is a personal
+                                    project that I built to help people find
+                                    their favorite coffee shops.
                                 </p>
                             </motion.div>
                             <Link
-                                href="https://lost-and-found-ph-83d720ab6d69.herokuapp.com"
+                                href="https://ratemycoffee.ph"
                                 target="_blank">
                                 <motion.div
                                     initial={{ opacity: 0, y: 100 }}
@@ -515,7 +515,7 @@ export default function CaseStudies() {
                                 delay: 1,
                                 ease: "easeInOut",
                             }}
-                            className="flex flex-col order-2 xl:order-3">
+                            className="flex flex-col order-3 xl:order-3">
                             <div className="flex flex-col flex-grow-1 gap-2 justify-between rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-6">
                                 <div className="flex flex-row gap-2 justify-between">
                                     <div className="flex flex-col gap-2">
@@ -536,7 +536,7 @@ export default function CaseStudies() {
                                                     d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
                                                 />
                                             </svg>
-                                            Authentication
+                                            Authentication & Authorization
                                         </div>
                                         <div className="flex flex-row gap-2">
                                             <svg
@@ -590,8 +590,8 @@ export default function CaseStudies() {
                                                 d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
                                             />
                                         </svg>
-                                        MongoDB, Mongoose, Express, Node.js,
-                                        React, Next, TailwindCSS, Preline UI
+                                        PHP, Laravel, PostgreSQL, React, Next,
+                                        TailwindCSS, Preline UI
                                     </div>
                                 </div>
                             </div>
@@ -607,9 +607,9 @@ export default function CaseStudies() {
                                 delay: 0.5,
                                 ease: "easeInOut",
                             }}
-                            className="order-3 xl:order-3">
+                            className="order-1 xl:order-1">
                             <Image
-                                src="/images/lost-and-found-thumb.png"
+                                src="/images/rate-my-coffee.png"
                                 alt="Lost and Found PH"
                                 width={500}
                                 height={0}
@@ -630,10 +630,10 @@ export default function CaseStudies() {
                                 delay: 0.5,
                                 ease: "easeInOut",
                             }}
-                            className="order-3 xl:order-1">
+                            className="order-1 xl:order-1">
                             <Image
                                 src="/images/open-architects-webflow.png"
-                                alt="Investa Trading Grounds"
+                                alt="Open Architects Webflow"
                                 width={500}
                                 height={0}
                                 className="rounded-lg w-full"
@@ -670,7 +670,7 @@ export default function CaseStudies() {
                                 <p className="text-md text-gray-500">
                                     Webflow project for Open Architects, a
                                     company that provides data visualizations
-                                    for K-12 schools.
+                                    for K-12 school districts.
                                 </p>
                             </motion.div>
 
