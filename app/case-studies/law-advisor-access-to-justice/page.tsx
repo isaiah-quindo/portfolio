@@ -2,26 +2,35 @@
 import Image from "next/image";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import CaseStudyReveal, {
+  RevealItem,
+} from "@/app/components/CaseStudyReveal";
 
 export default function LawAdvisorAccessToJustice() {
   return (
     <>
       <Header />
-      <div className="main-case-study min-h-lvh px-6 pt-40 px-6">
+      <CaseStudyReveal className="min-h-lvh px-6 pt-40">
         <div className="max-w-7xl m-auto">
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4 max-w-3xl">
-              <h1 className="text-4xl font-bold">Law Advisor</h1>
-              <p className="text-gray-400">Access to Justice Platform</p>
+              <RevealItem delay={0.4}>
+                <h1 className="text-4xl font-bold">Law Advisor</h1>
+              </RevealItem>
+              <RevealItem delay={0.55}>
+                <p className="text-gray-400">Access to Justice Platform</p>
+              </RevealItem>
             </div>
 
-            <Image
-              src="/images/law-advisor-showcase.jpg"
-              alt="Law Advisor"
-              width={1280}
-              height={720}
-              className="rounded-4xl h-auto"
-            />
+            <RevealItem delay={0.7} scaleIn>
+              <Image
+                src="/images/law-advisor-showcase.jpg"
+                alt="Law Advisor"
+                width={1280}
+                height={720}
+                className="rounded-4xl h-auto"
+              />
+            </RevealItem>
 
             <div className="flex flex-col gap-4 max-w-3xl">
               <h2 className="text-2xl font-bold">Overview</h2>
@@ -214,7 +223,7 @@ export default function LawAdvisorAccessToJustice() {
             </div>
           </div>
         </div>
-      </div>
+      </CaseStudyReveal>
       <Footer />
     </>
   );

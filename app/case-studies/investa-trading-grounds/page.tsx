@@ -2,26 +2,35 @@
 import Image from "next/image";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
+import CaseStudyReveal, {
+  RevealItem,
+} from "@/app/components/CaseStudyReveal";
 
 export default function InvestaTradingGrounds() {
   return (
     <>
       <Header />
-      <div className="main-case-study min-h-lvh px-6 pt-40 px-6">
+      <CaseStudyReveal className="min-h-lvh px-6 pt-40">
         <div className="max-w-7xl m-auto">
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4 max-w-3xl">
-              <h1 className="text-4xl font-bold">Investa Trading Grounds</h1>
-              <p className="text-gray-400">Web and Mobile</p>
+              <RevealItem delay={0.4}>
+                <h1 className="text-4xl font-bold">Investa Trading Grounds</h1>
+              </RevealItem>
+              <RevealItem delay={0.55}>
+                <p className="text-gray-400">Web and Mobile</p>
+              </RevealItem>
             </div>
 
-            <Image
-              src="/images/itg-showcase.jpg"
-              alt="Investa Trading Grounds"
-              width={1280}
-              height={720}
-              className="rounded-4xl h-auto"
-            />
+            <RevealItem delay={0.7} scaleIn>
+              <Image
+                src="/images/itg-showcase.jpg"
+                alt="Investa Trading Grounds"
+                width={1280}
+                height={720}
+                className="rounded-4xl h-auto"
+              />
+            </RevealItem>
 
             <div className="flex flex-col gap-4 max-w-3xl">
               <h2 className="text-2xl font-bold">Overview</h2>
@@ -264,7 +273,7 @@ export default function InvestaTradingGrounds() {
             </div>
           </div>
         </div>
-      </div>
+      </CaseStudyReveal>
       <Footer />
     </>
   );

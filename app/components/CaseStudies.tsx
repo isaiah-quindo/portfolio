@@ -1,840 +1,302 @@
 "use client";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import {
+    ArrowRight,
+    ArrowUpRight,
+    Atom01,
+    Brush01,
+    Cloud01,
+    Code02,
+    CodeBrowser,
+    Figma,
+    LayersThree01,
+    Lock01,
+    Monitor04,
+    Palette,
+    Phone02,
+    Tool02,
+} from "@untitled-ui/icons-react";
+import type { ComponentType, SVGProps } from "react";
+
+type IconType = ComponentType<SVGProps<SVGSVGElement>>;
+
+type MetaItem = { label: string; icon: IconType };
+
+type CaseStudy = {
+    title: string;
+    blurb: string;
+    image: string;
+    href: string;
+    platforms: MetaItem[];
+    roles: MetaItem[];
+    tools: MetaItem[];
+};
+
+type OtherProject = {
+    title: string;
+    blurb: string;
+    image: string;
+    href: string;
+    tags: MetaItem[];
+    stack: string;
+};
+
+const caseStudies: CaseStudy[] = [
+    {
+        title: "Law Advisor's Access to Justice",
+        blurb:
+            "LawAdvisor is changing the way to access legal services by connecting everyday people and businesses with expert and easy to understand legal advice and support.",
+        image: "/images/a2j-thumb.png",
+        href: "/case-studies/law-advisor-access-to-justice",
+        platforms: [
+            { label: "Web", icon: Monitor04 },
+            { label: "Mobile", icon: Phone02 },
+        ],
+        roles: [{ label: "Product Design", icon: Palette }],
+        tools: [{ label: "Figma", icon: Figma }],
+    },
+    {
+        title: "Investa Trading Grounds",
+        blurb:
+            "Investa Trading Grounds is a fun and interactive game where you can learn stock market trading by challenging players in a charting game.",
+        image: "/images/itg-showcase.jpg",
+        href: "/case-studies/investa-trading-grounds",
+        platforms: [
+            { label: "Web", icon: Monitor04 },
+            { label: "Mobile", icon: Phone02 },
+        ],
+        roles: [
+            { label: "Product Design", icon: Palette },
+            { label: "UI Development", icon: Code02 },
+        ],
+        tools: [
+            { label: "Figma", icon: Figma },
+            { label: "React + Bootstrap", icon: Atom01 },
+        ],
+    },
+];
+
+const otherProjects: OtherProject[] = [
+    {
+        title: "Rate My Coffee",
+        blurb:
+            "Full-stack web application for rating coffee shops in the Philippines. A personal project to help people find their favorite coffee shops.",
+        image: "/images/rate-my-coffee.png",
+        href: "https://ratemycoffee.ph",
+        tags: [
+            { label: "Auth", icon: Lock01 },
+            { label: "AWS S3", icon: Cloud01 },
+            { label: "MVC", icon: LayersThree01 },
+        ],
+        stack: "PHP · Laravel · PostgreSQL · React · Next · Tailwind",
+    },
+    {
+        title: "Open Architects",
+        blurb:
+            "Webflow project for Open Architects, a company that provides data visualizations for K-12 school districts.",
+        image: "/images/open-architects-webflow.png",
+        href: "https://openarchitectsk12.com/",
+        tags: [
+            { label: "Web Design", icon: Brush01 },
+            { label: "Web Development", icon: CodeBrowser },
+        ],
+        stack: "Figma · Webflow",
+    },
+];
+
+function Pill({ icon: Icon, label }: MetaItem) {
+    return (
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-300 bg-white/40 px-3 py-1 text-xs text-gray-700">
+            <Icon className="size-3.5" strokeWidth={2} />
+            {label}
+        </span>
+    );
+}
+
+function MetaGroup({ label, items }: { label: string; items: MetaItem[] }) {
+    return (
+        <div className="flex flex-col gap-2">
+            <p className="text-xs uppercase tracking-wider text-gray-500">
+                {label}
+            </p>
+            <div className="flex flex-wrap gap-2">
+                {items.map((item) => (
+                    <Pill key={item.label} {...item} />
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function CaseStudyCard({
+    study,
+    reverse,
+}: {
+    study: CaseStudy;
+    reverse: boolean;
+}) {
+    return (
+        <motion.article
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div
+                className={`lg:col-span-7 ${
+                    reverse ? "lg:order-2" : "lg:order-1"
+                }`}>
+                <Link href={study.href} className="group block">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-200">
+                        <Image
+                            src={study.image}
+                            alt={study.title}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 60vw"
+                            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        />
+                    </div>
+                </Link>
+            </div>
+            <div
+                className={`lg:col-span-5 flex flex-col gap-6 ${
+                    reverse ? "lg:order-1" : "lg:order-2"
+                }`}>
+                <div className="flex flex-col gap-3">
+                    <p className="text-xs uppercase tracking-wider text-gray-500">
+                        Case Study
+                    </p>
+                    <h3 className="text-3xl lg:text-4xl font-bold uppercase leading-tight">
+                        {study.title}
+                    </h3>
+                </div>
+                <p className="text-base text-gray-600 leading-relaxed">
+                    {study.blurb}
+                </p>
+                <div className="flex flex-col gap-4 pt-2">
+                    <MetaGroup label="Platform" items={study.platforms} />
+                    <MetaGroup label="Role" items={study.roles} />
+                    <MetaGroup label="Tools" items={study.tools} />
+                </div>
+                <Link
+                    href={study.href}
+                    className="group mt-2 inline-flex items-center justify-between gap-2 rounded-full border border-gray-300 px-5 py-3 text-sm font-medium transition-all duration-300 hover:border-black hover:bg-black hover:text-white">
+                    Read case study
+                    <ArrowRight
+                        className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                        strokeWidth={2}
+                    />
+                </Link>
+            </div>
+        </motion.article>
+    );
+}
+
+function OtherProjectCard({ project }: { project: OtherProject }) {
+    return (
+        <motion.article
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col gap-5 rounded-2xl border border-gray-300 p-5 transition-colors duration-300 hover:border-gray-500">
+            <Link
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-gray-200">
+                    <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                </div>
+            </Link>
+            <div className="flex flex-col gap-3">
+                <h4 className="text-xl font-bold uppercase">{project.title}</h4>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                    {project.blurb}
+                </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                    <Pill key={tag.label} {...tag} />
+                ))}
+            </div>
+            <div className="flex items-start gap-2 text-xs text-gray-500">
+                <Tool02 className="size-3.5 shrink-0 mt-0.5" strokeWidth={2} />
+                {project.stack}
+            </div>
+            <Link
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-auto inline-flex items-center justify-between gap-2 rounded-full border border-gray-300 px-5 py-3 text-sm font-medium transition-all duration-300 hover:border-black hover:bg-black hover:text-white">
+                Visit live site
+                <ArrowUpRight
+                    className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    strokeWidth={2}
+                />
+            </Link>
+        </motion.article>
+    );
+}
 
 export default function CaseStudies() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
-
     return (
         <div className="case-studies w-full bg-black text-black overflow-hidden">
             <div className="case-studies-container h-auto rounded-t-4xl p-6">
-                <div className="max-w-7xl m-auto py-15 flex flex-col gap-18">
+                <div className="max-w-7xl m-auto py-20 flex flex-col gap-24">
                     <motion.div
-                        ref={ref}
-                        initial={{ opacity: 0, y: 100 }}
-                        animate={{
-                            opacity: isInView ? 1 : 0,
-                            y: isInView ? 0 : 100,
-                        }}
-                        transition={{ duration: 1 }}
-                        className="mb-0">
-                        <h2 className="text-5xl font-bold uppercase ">
+                        initial={{ opacity: 0, y: 60 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-80px" }}
+                        transition={{ duration: 0.7, ease: "easeOut" }}
+                        className="flex flex-col gap-2">
+                        <p className="text-xs uppercase tracking-wider text-gray-500">
+                            Selected Work
+                        </p>
+                        <h2 className="text-5xl lg:text-6xl font-bold uppercase">
                             Case Studies
                         </h2>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        {/* Access to Justice */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                x: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1,
-                                delay: 0.5,
-                                ease: "easeInOut",
-                            }}
-                            className="order-1 xl:order-1">
-                            <Image
-                                src="/images/a2j-thumb.png"
-                                alt="Access to Justice"
-                                width={500}
-                                height={0}
-                                className="rounded-lg w-full"
+                    <div className="flex flex-col gap-24">
+                        {caseStudies.map((study, i) => (
+                            <CaseStudyCard
+                                key={study.href}
+                                study={study}
+                                reverse={i % 2 === 1}
                             />
-                        </motion.div>
-                        <div className="flex flex-col gap-4 order-2 xl:order-2">
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}>
-                                <h3 className="text-2xl font-bold uppercase">
-                                    Law Advisor&apos;s Access to Justice
-                                </h3>
-                            </motion.div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}
-                                className="flex-grow-1">
-                                <p className="text-md text-gray-500">
-                                    LawAdvisor is changing the way to access
-                                    legal services by connecting everyday people
-                                    and businesses with expert and easy to
-                                    understand legal advice and support.
-                                </p>
-                            </motion.div>
-                            <Link href="/case-studies/law-advisor-access-to-justice">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 100 }}
-                                    animate={{
-                                        opacity: isInView ? 1 : 0,
-                                        y: isInView ? 0 : 100,
-                                    }}
-                                    transition={{
-                                        duration: 1,
-                                        delay: 1,
-                                        ease: "easeInOut",
-                                    }}>
-                                    <div className="rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-4 flex flex-row gap-2 justify-between">
-                                        Read case study
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 self-start">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                                            />
-                                        </svg>
-                                    </div>
-                                </motion.div>
-                            </Link>
-                        </div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                y: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                delay: 1,
-                                ease: "easeInOut",
-                            }}
-                            className="flex flex-col order-2 xl:order-2">
-                            <div className="flex flex-col flex-grow-1 gap-2 justify-between rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-6">
-                                <div className="flex flex-row gap-2 justify-between">
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-sm text-gray-500">
-                                            Platform:
-                                        </p>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Web
-                                        </div>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Mobile
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-sm text-gray-500">
-                                            Role:
-                                        </p>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Product Design
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <p className="text-sm text-gray-500">
-                                        Tools:
-                                    </p>
-                                    <div className="flex flex-row gap-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 text-gray-500">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                            />
-                                        </svg>
-                                        Figma
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
+                        ))}
                     </div>
 
-                    {/* Investa Trading Grounds */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                y: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1,
-                                delay: 0.5,
-                                ease: "easeInOut",
-                            }}
-                            className="order-1 xl:order-1">
-                            <Image
-                                src="/images/itg-showcase.jpg"
-                                alt="Investa Trading Grounds"
-                                width={500}
-                                height={0}
-                                className="rounded-lg w-full"
-                            />
-                        </motion.div>
-                        <div className="flex flex-col gap-4 order-1 xl:order-2">
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}>
-                                <h3 className="text-2xl font-bold uppercase">
-                                    Investa Trading Grounds
-                                </h3>
-                            </motion.div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}
-                                className="flex-grow-1">
-                                <p className="text-md text-gray-500">
-                                    Investa Trading Grounds is a fun and
-                                    interactive game where you can learn stock
-                                    market trading by challenging players in a
-                                    charting game.
-                                </p>
-                            </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-60px" }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="flex flex-col gap-2 pt-8 border-t border-gray-300">
+                        <p className="text-xs uppercase tracking-wider text-gray-500">
+                            Also Built
+                        </p>
+                        <h2 className="text-3xl lg:text-4xl font-bold uppercase">
+                            Other Projects
+                        </h2>
+                    </motion.div>
 
-                            <Link href="/case-studies/investa-trading-grounds">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 100 }}
-                                    animate={{
-                                        opacity: isInView ? 1 : 0,
-                                        y: isInView ? 0 : 100,
-                                    }}
-                                    transition={{
-                                        duration: 1,
-                                        delay: 1,
-                                        ease: "easeInOut",
-                                    }}>
-                                    <div className="rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-4 flex flex-row gap-2 justify-between">
-                                        Read case study
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 self-start">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                                            />
-                                        </svg>
-                                    </div>
-                                </motion.div>
-                            </Link>
-                        </div>
-                        <motion.div
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                x: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                delay: 1,
-                                ease: "easeInOut",
-                            }}
-                            className="flex flex-col order-2 xl:order-2">
-                            <div className="flex flex-col flex-grow-1 gap-2 justify-between rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-6">
-                                <div className="flex flex-row gap-2 justify-between">
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-sm text-gray-500">
-                                            Platform:
-                                        </p>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Web
-                                        </div>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Mobile
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-sm text-gray-500">
-                                            Role:
-                                        </p>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Product Design
-                                        </div>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            UI Development
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <p className="text-sm text-gray-500">
-                                        Tools:
-                                    </p>
-                                    <div className="flex flex-row gap-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 text-gray-500">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                            />
-                                        </svg>
-                                        Figma
-                                    </div>
-                                    <div className="flex flex-row gap-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 text-gray-500">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                            />
-                                        </svg>
-                                        React + Bootstrap
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-
-                    <h2 className="text-3xl font-bold uppercase ">
-                        Web Development Projects
-                    </h2>
-                    {/* Personal Project */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div className="flex flex-col gap-4 order-2 xl:order-2">
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}>
-                                <h3 className="text-2xl font-bold uppercase">
-                                    Rate My Coffee
-                                </h3>
-                            </motion.div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}
-                                className="flex-grow-1">
-                                <p className="text-md text-gray-500">
-                                    Full-stack web application for rating coffee
-                                    shops in the Philippines. This is a personal
-                                    project that I built to help people find
-                                    their favorite coffee shops.
-                                </p>
-                            </motion.div>
-                            <Link
-                                href="https://ratemycoffee.ph"
-                                target="_blank">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 100 }}
-                                    animate={{
-                                        opacity: isInView ? 1 : 0,
-                                        y: isInView ? 0 : 100,
-                                    }}
-                                    transition={{
-                                        duration: 0.5,
-                                        delay: 1,
-                                        ease: "easeInOut",
-                                    }}>
-                                    <div className="rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-4 flex flex-row gap-2 justify-between">
-                                        Visit live site
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 self-start">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                                            />
-                                        </svg>
-                                    </div>
-                                </motion.div>
-                            </Link>
-                        </div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                y: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1,
-                                delay: 1,
-                                ease: "easeInOut",
-                            }}
-                            className="flex flex-col order-3 xl:order-3">
-                            <div className="flex flex-col flex-grow-1 gap-2 justify-between rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-6">
-                                <div className="flex flex-row gap-2 justify-between">
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-sm text-gray-500">
-                                            Features:
-                                        </p>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Authentication & Authorization
-                                        </div>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Image Upload and Storage with AWS S3
-                                        </div>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            MVC Architecture
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <p className="text-sm text-gray-500">
-                                        Tech Stack:
-                                    </p>
-                                    <div className="flex flex-row gap-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 text-gray-500">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                            />
-                                        </svg>
-                                        PHP, Laravel, PostgreSQL, React, Next,
-                                        TailwindCSS, Preline UI
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                x: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1,
-                                delay: 0.5,
-                                ease: "easeInOut",
-                            }}
-                            className="order-1 xl:order-1">
-                            <Image
-                                src="/images/rate-my-coffee.png"
-                                alt="Lost and Found PH"
-                                width={500}
-                                height={0}
-                                className="rounded-lg w-full"
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {otherProjects.map((project) => (
+                            <OtherProjectCard
+                                key={project.href}
+                                project={project}
                             />
-                        </motion.div>
-                    </div>
-                    {/* Webflow */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                y: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1,
-                                delay: 0.5,
-                                ease: "easeInOut",
-                            }}
-                            className="order-1 xl:order-1">
-                            <Image
-                                src="/images/open-architects-webflow.png"
-                                alt="Open Architects Webflow"
-                                width={500}
-                                height={0}
-                                className="rounded-lg w-full"
-                            />
-                        </motion.div>
-                        <div className="flex flex-col gap-4 order-1 xl:order-2">
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}>
-                                <h3 className="text-2xl font-bold uppercase">
-                                    Open Architects
-                                </h3>
-                            </motion.div>
-                            <motion.div
-                                initial={{ opacity: 0, y: 100 }}
-                                animate={{
-                                    opacity: isInView ? 1 : 0,
-                                    y: isInView ? 0 : 100,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                    delay: 0.5,
-                                    ease: "easeInOut",
-                                }}
-                                className="flex-grow-1">
-                                <p className="text-md text-gray-500">
-                                    Webflow project for Open Architects, a
-                                    company that provides data visualizations
-                                    for K-12 school districts.
-                                </p>
-                            </motion.div>
-
-                            <Link
-                                href="https://openarchitectsk12.com/"
-                                target="_blank">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 100 }}
-                                    animate={{
-                                        opacity: isInView ? 1 : 0,
-                                        y: isInView ? 0 : 100,
-                                    }}
-                                    transition={{
-                                        duration: 1,
-                                        delay: 1,
-                                        ease: "easeInOut",
-                                    }}>
-                                    <div className="rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-4 flex flex-row gap-2 justify-between">
-                                        Visit live site
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 self-start">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
-                                            />
-                                        </svg>
-                                    </div>
-                                </motion.div>
-                            </Link>
-                        </div>
-                        <motion.div
-                            initial={{ opacity: 0, x: 100 }}
-                            animate={{
-                                opacity: isInView ? 1 : 0,
-                                x: isInView ? 0 : 100,
-                            }}
-                            transition={{
-                                duration: 1.5,
-                                delay: 1,
-                                ease: "easeInOut",
-                            }}
-                            className="flex flex-col order-2 xl:order-2">
-                            <div className="flex flex-col flex-grow-1 gap-2 justify-between rounded-lg border border-gray-300 hover:border-blue-300 transition-all duration-300 p-6">
-                                <div className="flex flex-row gap-2 justify-between">
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-sm text-gray-500">
-                                            Platform:
-                                        </p>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Web
-                                        </div>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Mobile
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col gap-2">
-                                        <p className="text-sm text-gray-500">
-                                            Role:
-                                        </p>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Web Design
-                                        </div>
-                                        <div className="flex flex-row gap-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className="size-6 text-gray-500">
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                                />
-                                            </svg>
-                                            Web Development
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-2">
-                                    <p className="text-sm text-gray-500">
-                                        Tools:
-                                    </p>
-                                    <div className="flex flex-row gap-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 text-gray-500">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                            />
-                                        </svg>
-                                        Figma
-                                    </div>
-                                    <div className="flex flex-row gap-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="size-6 text-gray-500">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499"
-                                            />
-                                        </svg>
-                                        Webflow
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
+                        ))}
                     </div>
                 </div>
             </div>

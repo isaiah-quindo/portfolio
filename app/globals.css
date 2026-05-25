@@ -22,10 +22,6 @@ body {
     font-family: "Montreal", Arial, Helvetica, sans-serif;
     font-weight: normal;
 }
-html {
-    scroll-behavior: smooth;
-}
-
 body:after,
 body:before {
     filter: url(#noiseFilter);
@@ -40,20 +36,14 @@ body:before {
     pointer-events: none;
     opacity: 20%;
     color: #aeae9d;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 main {
     background-color: black;
     animation-duration: 1s;
     animation-name: reveal-main;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-
-.main-case-study {
-    background-color: black;
-    animation-duration: 1s;
-    animation-name: reveal-main-case-study;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -182,20 +172,6 @@ main {
         transform: translateY(0);
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-    }
-}
-
-@keyframes reveal-main-case-study {
-    0% {
-        transform: translateY(25%);
-        border-top-left-radius: 50%;
-        border-top-right-radius: 50%;
-    }
-
-    100% {
-        transform: translateY(0);
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
     }
 }
 
