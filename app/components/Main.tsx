@@ -148,21 +148,30 @@ export default function Main() {
                             </div>
                             <div className="techstack-item flex flex-row gap-2 self-start rounded-lg border border-gray-400 py-2 px-4">
                                 <Image
-                                    src="/images/techstack/nodejs.svg"
-                                    alt="Node.js"
+                                    src="/images/techstack/php.svg"
+                                    alt="PHP"
                                     width={24}
                                     height={24}
                                 />
-                                Node.js
+                                PHP
                             </div>
                             <div className="techstack-item flex flex-row gap-2 self-start rounded-lg border border-gray-400 py-2 px-4">
                                 <Image
-                                    src="/images/techstack/mongodb.svg"
-                                    alt="MongoDB"
+                                    src="/images/techstack/laravel.svg"
+                                    alt="Laravel"
                                     width={24}
                                     height={24}
                                 />
-                                MongoDB
+                                Laravel
+                            </div>
+                            <div className="techstack-item flex flex-row gap-2 self-start rounded-lg border border-gray-400 py-2 px-4">
+                                <Image
+                                    src="/images/techstack/postgresql.svg"
+                                    alt="PostgreSQL"
+                                    width={24}
+                                    height={24}
+                                />
+                                PostgreSQL
                             </div>
                             <div className="techstack-item flex flex-row gap-2 self-start rounded-lg border border-gray-400 py-2 px-4">
                                 <Image

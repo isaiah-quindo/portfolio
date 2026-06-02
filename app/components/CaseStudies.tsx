@@ -51,7 +51,7 @@ const caseStudies: CaseStudy[] = [
     {
         title: "Archetype UI: Designing in Code",
         blurb:
-            "How AI changed our design workflow at Open Architects — a company providing data visualizations for K-12 school districts. Design moved out of Figma and into an interactive playground built in Next.js.",
+            "How AI changed our design workflow at Open Architects — a company providing data visualisations for K-12 school districts. Design moved out of Figma and into an interactive playground built in Next.js.",
         image: "/images/open-architects-archetype-hero.png",
         href: "/case-studies/open-architects-archetype-ui",
         platforms: [{ label: "Web", icon: Monitor04 }],

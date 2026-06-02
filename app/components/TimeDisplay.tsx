@@ -18,12 +18,10 @@ export default function TimeDisplay() {
       const parts = new Intl.DateTimeFormat("en-AU", options).formatToParts(
         new Date()
       );
-      const timeStr = parts
-        .filter((p) => ["hour", "minute", "dayPeriod"].includes(p.type))
-        .map((p) => p.value)
-        .join("")
-        .replace(/(\d)([ap]m)/i, "$1 $2");
-      const tzName = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+      const get = (type: string) =>
+        parts.find((p) => p.type === type)?.value ?? "";
+      const timeStr = `${get("hour")}:${get("minute")} ${get("dayPeriod")}`;
+      const tzName = get("timeZoneName");
       setTime(`${timeStr} ${tzName}`);
     };
 
