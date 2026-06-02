@@ -22,6 +22,7 @@ body {
     font-family: "Montreal", Arial, Helvetica, sans-serif;
     font-weight: normal;
 }
+/* Disabled: SVG filter overlay caused Safari scroll jitter (full-viewport per-frame rasterization).
 body:after,
 body:before {
     filter: url(#noiseFilter);
@@ -39,6 +40,7 @@ body:before {
     transform: translateZ(0);
     will-change: transform;
 }
+*/
 
 main {
     background-color: black;

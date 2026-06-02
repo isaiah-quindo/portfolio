@@ -11,11 +11,20 @@ export default function TimeDisplay() {
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
-        timeZone: "Asia/Manila",
+        timeZone: "Australia/Sydney",
+        timeZoneName: "short",
       };
 
-      const manilaTime = new Date().toLocaleTimeString("en-US", options);
-      setTime(manilaTime + " GMT+8");
+      const parts = new Intl.DateTimeFormat("en-AU", options).formatToParts(
+        new Date()
+      );
+      const timeStr = parts
+        .filter((p) => ["hour", "minute", "dayPeriod"].includes(p.type))
+        .map((p) => p.value)
+        .join("")
+        .replace(/(\d)([ap]m)/i, "$1 $2");
+      const tzName = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+      setTime(`${timeStr} ${tzName}`);
     };
 
     // Update immediately
@@ -45,7 +54,7 @@ export default function TimeDisplay() {
         />
       </svg>
       <p>
-        <span className="text-xl">{time}</span> <br /> in Manila
+        <span className="text-xl">{time}</span> <br /> in Sydney
       </p>
     </div>
   );

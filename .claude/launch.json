@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "archetype-ui",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/isaiahquindo/Desktop/archetype-ui",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3000"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "3001"],
+      "port": 3001
+    }
+  ]
+}

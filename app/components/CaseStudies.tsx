@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import ArchetypeShowcase from "./ArchetypeShowcase";
 import {
     ArrowRight,
     ArrowUpRight,
@@ -10,12 +11,14 @@ import {
     Cloud01,
     Code02,
     CodeBrowser,
+    CodeSquare02,
     Figma,
     LayersThree01,
     Lock01,
     Monitor04,
     Palette,
     Phone02,
+    Stars02,
     Tool02,
 } from "@untitled-ui/icons-react";
 import type { ComponentType, SVGProps } from "react";
@@ -32,6 +35,7 @@ type CaseStudy = {
     platforms: MetaItem[];
     roles: MetaItem[];
     tools: MetaItem[];
+    isometric?: boolean;
 };
 
 type OtherProject = {
@@ -44,6 +48,24 @@ type OtherProject = {
 };
 
 const caseStudies: CaseStudy[] = [
+    {
+        title: "Archetype UI: Designing in Code",
+        blurb:
+            "How AI changed our design workflow at Open Architects — a company providing data visualizations for K-12 school districts. Design moved out of Figma and into an interactive playground built in Next.js.",
+        image: "/images/open-architects-archetype-hero.png",
+        href: "/case-studies/open-architects-archetype-ui",
+        platforms: [{ label: "Web", icon: Monitor04 }],
+        roles: [
+            { label: "Senior Product Designer", icon: Palette },
+            { label: "AI-Assisted Workflow", icon: Stars02 },
+        ],
+        tools: [
+            { label: "Figma", icon: Figma },
+            { label: "Claude Code", icon: CodeSquare02 },
+            { label: "Next.js + Tailwind", icon: Atom01 },
+        ],
+        isometric: true,
+    },
     {
         title: "Law Advisor's Access to Justice",
         blurb:
@@ -149,15 +171,19 @@ function CaseStudyCard({
                     reverse ? "lg:order-2" : "lg:order-1"
                 }`}>
                 <Link href={study.href} className="group block">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-200">
-                        <Image
-                            src={study.image}
-                            alt={study.title}
-                            fill
-                            sizes="(max-width: 1024px) 100vw, 60vw"
-                            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                        />
-                    </div>
+                    {study.isometric ? (
+                        <ArchetypeShowcase reverse={reverse} />
+                    ) : (
+                        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-200">
+                            <Image
+                                src={study.image}
+                                alt={study.title}
+                                fill
+                                sizes="(max-width: 1024px) 100vw, 60vw"
+                                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                            />
+                        </div>
+                    )}
                 </Link>
             </div>
             <div
