@@ -105,7 +105,7 @@ const otherProjects: OtherProject[] = [
         title: "Ricon",
         blurb:
             "Full-stack web application for Ricon, a running events company in the Philippines that organizes races and running events.",
-        image: "/images/ricon.png",
+        image: "/images/ricon-2.png",
         href: "https://ricon.ph/",
         tags: [
             { label: "Auth", icon: Lock01 },

@@ -85,7 +85,7 @@ export default function ArchetypeShowcase({ reverse }: { reverse: boolean }) {
 
     return (
         <div ref={ref} className="relative aspect-[4/3] w-full">
-            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/30 ring-1 ring-black/5">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
                 {/* Diagonal stripes — matches the untitledui hero plane */}
                 <div
                     aria-hidden
