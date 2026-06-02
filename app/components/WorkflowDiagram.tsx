@@ -70,7 +70,7 @@ const nodeVariants = {
     visible: (i: number) => ({
         opacity: 1,
         y: 0,
-        transition: { duration: 0.4, ease: "easeOut", delay: i * 2 * STEP_DELAY },
+        transition: { duration: 0.4, ease: "easeOut" as const, delay: i * 2 * STEP_DELAY },
     }),
 };
 
@@ -80,7 +80,7 @@ const arrowVariants = {
         pathLength: 1,
         transition: {
             duration: 0.4,
-            ease: "easeOut",
+            ease: "easeOut" as const,
             delay: (i * 2 + 1) * STEP_DELAY,
         },
     }),

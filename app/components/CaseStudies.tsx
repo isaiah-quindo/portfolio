@@ -8,7 +8,6 @@ import {
     ArrowUpRight,
     Atom01,
     Brush01,
-    Cloud01,
     Code02,
     CodeBrowser,
     CodeSquare02,
@@ -45,6 +44,7 @@ type OtherProject = {
     href: string;
     tags: MetaItem[];
     stack: string;
+    imagePosition?: string;
 };
 
 const caseStudies: CaseStudy[] = [
@@ -102,17 +102,18 @@ const caseStudies: CaseStudy[] = [
 
 const otherProjects: OtherProject[] = [
     {
-        title: "Rate My Coffee",
+        title: "Ricon",
         blurb:
-            "Full-stack web application for rating coffee shops in the Philippines. A personal project to help people find their favorite coffee shops.",
-        image: "/images/rate-my-coffee.png",
-        href: "https://ratemycoffee.ph",
+            "Full-stack web application for Ricon, a running events company in the Philippines that organizes races and running events.",
+        image: "/images/ricon.png",
+        href: "https://ricon.ph/",
         tags: [
             { label: "Auth", icon: Lock01 },
-            { label: "AWS S3", icon: Cloud01 },
             { label: "MVC", icon: LayersThree01 },
+            { label: "Server-Rendered", icon: Code02 },
         ],
-        stack: "PHP · Laravel · PostgreSQL · React · Next · Tailwind",
+        stack: "PHP · Laravel · PostgreSQL · Blade · Tailwind",
+        imagePosition: "object-top",
     },
     {
         title: "Open Architects",
@@ -239,7 +240,9 @@ function OtherProjectCard({ project }: { project: OtherProject }) {
                         alt={project.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        className={`object-cover ${
+                            project.imagePosition ?? "object-center"
+                        } transition-transform duration-700 group-hover:scale-[1.03]`}
                     />
                 </div>
             </Link>
