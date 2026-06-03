@@ -92,18 +92,18 @@ export default function WorkflowDiagram() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
-            className="relative w-full rounded-4xl bg-[#F9FAFB] overflow-hidden py-12 md:py-0 md:aspect-[16/5]">
-            <div className="flex flex-col md:flex-row h-full w-full items-center justify-center gap-6 px-6 md:gap-6 md:px-12">
+            className="relative w-full rounded-4xl bg-[#F9FAFB] overflow-hidden py-8 md:py-0 md:aspect-[16/5]">
+            <div className="flex flex-col md:flex-row h-full w-full items-start md:items-center justify-center gap-3 px-6 md:gap-6 md:px-12">
                 {STEPS.map((step, idx) => (
                     <div
                         key={step.label}
-                        className="flex flex-col md:flex-row w-full md:flex-1 items-center gap-6 md:gap-6">
+                        className="flex flex-col md:flex-row w-full md:flex-1 items-start md:items-center gap-2 md:gap-6">
                         <motion.div
                             custom={idx}
                             variants={nodeVariants}
-                            className="w-full md:flex-1 flex flex-col items-center gap-3 text-center will-change-transform">
+                            className="w-full md:flex-1 flex flex-row md:flex-col items-center gap-3 text-left md:text-center will-change-transform">
                             <div
-                                className={`flex size-14 md:size-20 items-center justify-center rounded-2xl ring-1 ring-inset ${step.accent}`}>
+                                className={`flex size-12 md:size-20 shrink-0 items-center justify-center rounded-2xl ring-1 ring-inset ${step.accent}`}>
                                 {step.image ? (
                                     <Image
                                         src={step.image}
@@ -132,7 +132,7 @@ export default function WorkflowDiagram() {
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
-                                className="size-5 md:size-6 shrink-0 rotate-90 md:rotate-0 text-gray-400">
+                                className="ml-3.5 md:ml-0 size-5 md:size-6 shrink-0 rotate-90 md:rotate-0 text-gray-400">
                                 <motion.path
                                     custom={idx}
                                     variants={arrowVariants}

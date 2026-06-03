@@ -50,13 +50,15 @@ export default function HeroComponentStack() {
                     <motion.div
                         key={img.src}
                         style={{ x: xs[idx] }}
-                        className="w-full will-change-transform">
+                        className={`flex w-full md:overflow-visible will-change-transform ${
+                            idx % 2 === 1 ? "justify-end" : "justify-start"
+                        }`}>
                         <Image
                             src={img.src}
                             alt={img.alt}
                             width={1173}
                             height={258}
-                            className="w-full h-auto"
+                            className="h-32 w-auto max-w-none shrink-0 sm:h-40 md:h-auto md:w-full md:max-w-full"
                         />
                     </motion.div>
                 ))}

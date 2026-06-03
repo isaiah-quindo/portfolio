@@ -4,6 +4,7 @@ import {
     useMotionValue,
     useMotionValueEvent,
     useScroll,
+    useSpring,
     useTransform,
 } from "framer-motion";
 import { CodeSquare02, Figma } from "@untitled-ui/icons-react";
@@ -83,9 +84,35 @@ export default function ArchetypeShowcase({ reverse }: { reverse: boolean }) {
     const ys = [y0, y1, y2, y3];
     const xs = [x0, x1, x2, x3];
 
+    // Magnetic pull for the floating "Built with" pill. The listener lives on the
+    // card so the pill itself can stay pointer-events-none (never blocks the card
+    // link). Offset is measured from the wrapper's resting center, which doesn't
+    // move when the pill transforms — so there's no feedback jitter.
+    const MAGNET_STRENGTH = 0.3;
+    const pillRef = useRef<HTMLDivElement>(null);
+    const magnetX = useSpring(0, { stiffness: 150, damping: 20, mass: 0.6 });
+    const magnetY = useSpring(0, { stiffness: 150, damping: 20, mass: 0.6 });
+
+    const handlePillMagnet = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!pillRef.current) return;
+        const rect = pillRef.current.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        magnetX.set((e.clientX - cx) * MAGNET_STRENGTH);
+        magnetY.set((e.clientY - cy) * MAGNET_STRENGTH);
+    };
+
+    const resetMagnet = () => {
+        magnetX.set(0);
+        magnetY.set(0);
+    };
+
     return (
         <div ref={ref} className="relative aspect-[4/3] w-full">
-            <div className="relative h-full w-full overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
+            <div
+                onMouseMove={handlePillMagnet}
+                onMouseLeave={resetMagnet}
+                className="relative h-full w-full overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
                 {/* Diagonal stripes — matches the untitledui hero plane */}
                 <div
                     aria-hidden
@@ -126,12 +153,16 @@ export default function ArchetypeShowcase({ reverse }: { reverse: boolean }) {
                 </div>
 
                 {/* Floating center pill */}
-                <div className="pointer-events-none absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
-                    <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white/95 px-3 py-1.5 shadow-2xl backdrop-blur sm:gap-2.5 sm:px-4 sm:py-2">
-                        <span className="text-[10px] font-medium text-gray-500 sm:text-xs">
+                <div
+                    ref={pillRef}
+                    className="pointer-events-none absolute top-1/2 left-0 right-0 z-10 flex -translate-y-1/2 justify-center px-4">
+                    <motion.div
+                        style={{ x: magnetX, y: magnetY }}
+                        className="flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-2xl border border-gray-200 bg-white/95 px-3 py-1.5 shadow-2xl backdrop-blur will-change-transform sm:gap-x-2.5 sm:rounded-full sm:px-4 sm:py-2">
+                        <span className="whitespace-nowrap text-[10px] font-medium text-gray-500 sm:text-xs">
                             Built with
                         </span>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-900 sm:text-xs">
+                        <span className="inline-flex items-center gap-1 whitespace-nowrap text-[10px] font-semibold text-gray-900 sm:text-xs">
                             <Figma
                                 className="size-3 sm:size-3.5"
                                 strokeWidth={2}
@@ -139,14 +170,14 @@ export default function ArchetypeShowcase({ reverse }: { reverse: boolean }) {
                             Figma
                         </span>
                         <span className="text-gray-300">·</span>
-                        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-900 sm:text-xs">
+                        <span className="inline-flex items-center gap-1 whitespace-nowrap text-[10px] font-semibold text-gray-900 sm:text-xs">
                             <CodeSquare02
                                 className="size-3 sm:size-3.5"
                                 strokeWidth={2}
                             />
                             Claude Code
                         </span>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>
