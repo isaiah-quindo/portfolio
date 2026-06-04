@@ -278,7 +278,9 @@ function OtherProjectCard({ project }: { project: OtherProject }) {
 
 export default function CaseStudies() {
     return (
-        <div className="case-studies w-full bg-black text-black overflow-hidden">
+        <div
+            id="case-studies"
+            className="case-studies w-full bg-black text-black overflow-hidden">
             <div className="case-studies-container h-auto rounded-t-4xl p-6">
                 <div className="max-w-7xl m-auto py-20 flex flex-col gap-24">
                     <motion.div

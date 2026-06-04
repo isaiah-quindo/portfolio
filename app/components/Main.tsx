@@ -1,5 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ChevronDown } from "@untitled-ui/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import TimeDisplay from "./TimeDisplay";
@@ -30,8 +31,22 @@ export default function Main() {
         }
     );
 
+    // Fade the scroll-indicator chevron out quickly as the user starts scrolling
+    const chevronOpacity = useTransform(scrollY, [0, 250], [1, 0]);
+
+    const scrollToCaseStudies = () => {
+        const target = document.getElementById("case-studies");
+        if (!target) return;
+
+        if (window.lenis) {
+            window.lenis.scrollTo(target, { offset: 0 });
+        } else {
+            target.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
-        <main className="flex flex-col items-center justify-center w-full h-auto lg:h-lvh md:h-auto sm:h-auto p-6 overflow-hidden">
+        <main className="relative flex flex-col items-center justify-center w-full h-auto lg:h-lvh md:h-auto sm:h-auto p-6 overflow-hidden">
             <motion.div
                 className="w-full max-w-7xl"
                 style={{
@@ -139,12 +154,12 @@ export default function Main() {
                             </div>
                             <div className="techstack-item flex flex-row gap-2 self-start rounded-lg border border-gray-400 py-2 px-4">
                                 <Image
-                                    src="/images/techstack/typescript.svg"
-                                    alt="TypeScript"
+                                    src="/images/techstack/claude.svg"
+                                    alt="Claude Code"
                                     width={24}
                                     height={24}
                                 />
-                                TypeScript
+                                Claude Code
                             </div>
                             <div className="techstack-item flex flex-row gap-2 self-start rounded-lg border border-gray-400 py-2 px-4">
                                 <Image
@@ -258,6 +273,28 @@ export default function Main() {
                         </p>
                     </div>
                 </div>
+            </motion.div>
+
+            <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.5, duration: 0.6, ease: "easeOut" }}
+                style={{ left: "50%", x: "-50%" }}
+                className="hidden lg:block absolute bottom-8">
+                <motion.button
+                    type="button"
+                    onClick={scrollToCaseStudies}
+                    aria-label="Scroll to case studies"
+                    style={{ opacity: chevronOpacity }}
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{
+                        duration: 1.6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                    }}
+                    className="flex items-center justify-center rounded-full border border-gray-600 hover:border-blue-300 p-3 transition-colors duration-300 cursor-pointer">
+                    <ChevronDown className="size-6" />
+                </motion.button>
             </motion.div>
         </main>
     );

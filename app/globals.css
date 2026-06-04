@@ -51,6 +51,9 @@ main {
 }
 
 .wordmark {
+    width: 100%;
+    max-width: 880px;
+    height: auto;
     opacity: 0;
     animation-duration: 1s;
     animation-delay: 1s;
@@ -134,6 +137,9 @@ main {
 }
 .techstack-item:nth-child(9) {
     animation-delay: 3.5s;
+}
+.techstack-item:nth-child(10) {
+    animation-delay: 3.75s;
 }
 
 .figma-icon {

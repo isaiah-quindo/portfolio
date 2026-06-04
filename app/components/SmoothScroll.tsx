@@ -4,6 +4,12 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
+declare global {
+    interface Window {
+        lenis?: Lenis;
+    }
+}
+
 export default function SmoothScroll({
     children,
 }: {
@@ -25,6 +31,7 @@ export default function SmoothScroll({
             infinite: false,
         });
         lenisRef.current = lenis;
+        window.lenis = lenis;
 
         function raf(time: number) {
             lenis.raf(time);
@@ -41,6 +48,7 @@ export default function SmoothScroll({
         return () => {
             lenis.destroy();
             lenisRef.current = null;
+            window.lenis = undefined;
         };
     }, [scrollY]);
 
